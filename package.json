@@ -13,5 +13,8 @@
   },
   "scripts": {
     "dev": "tsx watch src//ubdex.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "6.2.1"
   }
 }
