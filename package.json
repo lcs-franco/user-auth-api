@@ -1,0 +1,17 @@
+{
+  "name": "user-auth-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:lcs-franco/user-auth-api.git",
+  "author": "Lucas Franco <lcs.franco556@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "prisma": "^6.2.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  },
+  "scripts": {
+    "dev": "tsx watch src//ubdex.ts"
+  }
+}
