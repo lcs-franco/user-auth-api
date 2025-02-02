@@ -1,6 +1,5 @@
 import Fastify, { FastifyRequest } from "fastify";
-import { SignInContoller } from "../app/controllers/SignInController";
-import { SignInUseCase } from "../app/useCases/SignInUseCase";
+import { makeSignInController } from "../factories/makeSignInController";
 import { makeSignUpController } from "../factories/makeSignUpController";
 
 const fastify = Fastify();
@@ -18,8 +17,7 @@ fastify.post("/sign-up", async (request: Request, reply) => {
 });
 
 fastify.post("/sign-in", async (request: Request, reply) => {
-  const signInUseCase = new SignInUseCase();
-  const signInController = new SignInContoller(signInUseCase);
+  const signInController = makeSignInController();
 
   const { body, statusCode } = await signInController.handle({
     body: request.body,
