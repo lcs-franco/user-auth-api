@@ -1,3 +1,2 @@
-import { main } from "./server";
-
-main();
+import "dotenv/config";
+import "./server";
