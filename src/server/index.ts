@@ -1,17 +1,14 @@
 import Fastify, { FastifyRequest } from "fastify";
 import { SignInContoller } from "../app/controllers/SignInController";
-import { SignUpController } from "../app/controllers/SignUpController";
 import { SignInUseCase } from "../app/useCases/SignInUseCase";
-import { SignUpUseCase } from "../app/useCases/SignUpUseCase";
+import { makeSignUpController } from "../factories/makeSignUpController";
 
 const fastify = Fastify();
 
 type Request = FastifyRequest<{ Body: Record<string, any> }>;
 
 fastify.post("/sign-up", async (request: Request, reply) => {
-  const SALT = 10;
-  const signUpUseCase = new SignUpUseCase(SALT);
-  const signUpController = new SignUpController(signUpUseCase);
+  const signUpController = makeSignUpController();
 
   const { body, statusCode } = await signUpController.handle({
     body: request.body,
