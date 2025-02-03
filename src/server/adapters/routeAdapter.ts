@@ -6,8 +6,10 @@ type Request = FastifyRequest<{
   Params: Record<string, string>;
 }>;
 
+type Reply = FastifyReply;
+
 export function routeAdapter(controller: IController) {
-  return async (request: Request, reply: FastifyReply) => {
+  return async (request: Request, reply: Reply) => {
     const { body, statusCode } = await controller.handle({
       body: request.body,
       params: request.params,
