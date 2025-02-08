@@ -9,7 +9,17 @@ const fastify = Fastify();
 fastify.post("/sign-up", routeAdapter(makeSignUpController()));
 fastify.post("/sign-in", routeAdapter(makeSignInController()));
 
-fastify.get("/list-users", routeAdapter(makeListUsersController()));
+fastify.get(
+  "/list-users",
+  {
+    preHandler: (request, reply, done) => {
+      const authorization = request.headers.authorization;
+      if (!authorization) return reply.code(401).send({});
+      done();
+    },
+  },
+  routeAdapter(makeListUsersController())
+);
 
 export async function main() {
   try {
