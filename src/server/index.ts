@@ -1,13 +1,11 @@
 import Fastify from "fastify";
 import { makeListUsersController } from "../factories/makeListUsersController";
-import { makeSignInController } from "../factories/makeSignInController";
-import { makeSignUpController } from "../factories/makeSignUpController";
 import { routeAdapter } from "./adapters/routeAdapter";
+import { userRoutes } from "./routes/userRoutes";
 
 const fastify = Fastify();
 
-fastify.post("/sign-up", routeAdapter(makeSignUpController()));
-fastify.post("/sign-in", routeAdapter(makeSignInController()));
+fastify.register(userRoutes, { prefix: "users" });
 
 fastify.get(
   "/list-users",
