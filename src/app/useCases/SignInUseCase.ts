@@ -19,11 +19,10 @@ export class SignInUseCase {
       where: { email },
     });
 
-    if (!account) throw new InvalidCredentials();
+    const isPasswordValid =
+      account && (await compare(password, account.password));
 
-    const isPasswordValid = await compare(password, account.password);
-
-    if (!isPasswordValid) throw new InvalidCredentials();
+    if (!isPasswordValid || !account) throw new InvalidCredentials();
 
     const accessToken = sign({ sub: account.id }, env.jwtSecret, {
       expiresIn: "1d",
