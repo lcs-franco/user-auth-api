@@ -13,7 +13,7 @@ export function routeAdapter(controller: IController) {
     const { body, statusCode } = await controller.handle({
       body: request.body,
       params: request.params,
-      accountId: request.metadata?.account?.accountId,
+      accountId: request.metadata?.account?.id,
     });
 
     reply.code(statusCode).send(body);
