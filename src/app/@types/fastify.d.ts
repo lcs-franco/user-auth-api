@@ -4,7 +4,7 @@ declare module 'fastify' {
   export interface FastifyRequest {
     metadata?: {
       account?: {
-        accountId: string;
+        id: string;
         role: string;
       };
     };
