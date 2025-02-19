@@ -1,8 +1,8 @@
-import { compare } from "bcryptjs";
-import { sign } from "jsonwebtoken";
-import { env } from "../config/env";
-import { InvalidCredentials } from "../errors/InvalidCredentials";
-import { prismaClient } from "../lib/prismaClient";
+import { compare } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
+import { env } from '../config/env';
+import { InvalidCredentials } from '../errors/InvalidCredentials';
+import { prismaClient } from '../lib/prismaClient';
 
 interface IInput {
   email: string;
@@ -24,9 +24,13 @@ export class SignInUseCase {
 
     if (!isPasswordValid || !account) throw new InvalidCredentials();
 
-    const accessToken = sign({ sub: account.id }, env.jwtSecret, {
-      expiresIn: "1d",
-    });
+    const accessToken = sign(
+      { sub: account.id, role: account.role },
+      env.jwtSecret,
+      {
+        expiresIn: '1d',
+      }
+    );
 
     return { accessToken };
   }
