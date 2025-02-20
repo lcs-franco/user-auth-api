@@ -1,6 +1,6 @@
-import { hash } from "bcryptjs";
-import { AccountAlreadyExists } from "../errors/AccountAlreadyExists";
-import { prismaClient } from "../lib/prismaClient";
+import { hash } from 'bcryptjs';
+import { AccountAlreadyExists } from '../errors/AccountAlreadyExists';
+import { prismaClient } from '../lib/prismaClient';
 
 interface IInput {
   name: string;
@@ -27,6 +27,7 @@ export class SignUpUseCase {
         email,
         name,
         password: hashedPassword,
+        role: 'USER',
       },
     });
   }
