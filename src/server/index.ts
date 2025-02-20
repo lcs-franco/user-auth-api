@@ -1,5 +1,6 @@
 import Fastify from 'fastify';
 import { makeAuthenticationMiddleware } from '../factories/makeAuthenticationMiddleware';
+import { makeAuthorizationMiddleware } from '../factories/makeAuthorizationMiddleware';
 import { makeListUsersController } from '../factories/makeListUsersController';
 import { middlewareAdapter } from './adapters/middlewareAdapter';
 import { routeAdapter } from './adapters/routeAdapter';
@@ -15,6 +16,17 @@ fastify.get(
     preHandler: [middlewareAdapter(makeAuthenticationMiddleware())],
   },
   routeAdapter(makeListUsersController())
+);
+
+fastify.post(
+  '/create-users',
+  {
+    preHandler: [
+      middlewareAdapter(makeAuthenticationMiddleware()),
+      middlewareAdapter(makeAuthorizationMiddleware(['ADMIN'])),
+    ],
+  },
+  async (req, res) => res.send({ created: true })
 );
 
 export async function main() {
