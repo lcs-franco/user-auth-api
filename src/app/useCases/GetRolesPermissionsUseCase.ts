@@ -1,0 +1,24 @@
+import { prismaClient } from '../lib/prismaClient';
+
+interface IInput {
+  roleId: string;
+}
+
+interface IOutput {
+  permissionsCodes: string[];
+}
+
+export class GetRolesPermissionsUseCase {
+  async execute({ roleId }: IInput): Promise<IOutput> {
+    const rolePermissions = await prismaClient.rolePermission.findMany({
+      where: { roleId },
+      select: { permissionCode: true },
+    });
+
+    const permissionsCodes = rolePermissions.map(
+      (rolePermissions) => rolePermissions.permissionCode
+    );
+
+    return { permissionsCodes };
+  }
+}
