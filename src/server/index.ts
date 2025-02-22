@@ -23,7 +23,7 @@ fastify.post(
   {
     preHandler: [
       middlewareAdapter(makeAuthenticationMiddleware()),
-      middlewareAdapter(makeAuthorizationMiddleware(['ADMIN'])),
+      middlewareAdapter(makeAuthorizationMiddleware(['leads:write'])),
     ],
   },
   async (req, res) => res.send({ created: true })
