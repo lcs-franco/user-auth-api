@@ -1,5 +1,5 @@
+import { IController } from '@app/interfaces/IController';
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { IController } from '../../app/interfaces/IController';
 
 type Request = FastifyRequest<{
   Body: Record<string, any>;

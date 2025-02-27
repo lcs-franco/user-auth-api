@@ -1,6 +1,6 @@
+import { makeAuthenticationMiddleware } from '@factories/makeAuthenticationMiddleware';
+import { makeAuthorizationMiddleware } from '@factories/makeAuthorizationMiddleware';
 import Fastify from 'fastify';
-import { makeAuthenticationMiddleware } from '../factories/makeAuthenticationMiddleware';
-import { makeAuthorizationMiddleware } from '../factories/makeAuthorizationMiddleware';
 import { middlewareAdapter } from './adapters/middlewareAdapter';
 import { userRoutes } from './routes/userRoutes';
 
