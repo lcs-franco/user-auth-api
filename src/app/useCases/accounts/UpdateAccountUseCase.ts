@@ -23,7 +23,10 @@ export class UpdateAccountUseCase {
 
     const updatedAccount = await prismaClient.account.update({
       data: { name, email },
-      where: { id: account?.id },
+      where: { id },
+      select: { email: true, name: true },
     });
+
+    return updatedAccount;
   }
 }
