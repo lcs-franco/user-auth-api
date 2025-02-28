@@ -4,6 +4,6 @@ export interface IRequest {
   headers: Record<string, string>;
   account?: {
     id: string;
-    role: string;
+    roleId: string;
   };
 }

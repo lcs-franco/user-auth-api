@@ -1,28 +1,30 @@
+import { AccountAlreadyExists } from '@app/errors/AccountAlreadyExists';
+import { UpdateAccountUseCase } from '@app/useCases/accounts/UpdateAccountUseCase';
 import { z, ZodError } from 'zod';
-import { AccountAlreadyExists } from '../errors/AccountAlreadyExists';
 import { IController, IResponse } from '../interfaces/IController';
 import { IRequest } from '../interfaces/IRequest';
-import { SignUpUseCase } from '../useCases/accounts/SignUpUseCase';
 
 const schema = z.object({
-  name: z.string().min(2),
-  email: z.string().email().min(2),
-  password: z.string().min(8),
-  roleId: z.string().uuid(),
+  email: z.string().email().min(2).optional(),
+  name: z.string().min(2).optional(),
 });
 
-export class SignUpController implements IController {
-  constructor(private readonly signUpUseCase: SignUpUseCase) {}
+export class UpdateAccountController implements IController {
+  constructor(private readonly updateAccountUseCase: UpdateAccountUseCase) {}
 
-  async handle({ body }: IRequest): Promise<IResponse> {
+  async handle({ body, params }: IRequest): Promise<IResponse> {
     try {
-      const { email, name, password, roleId } = schema.parse(body);
+      const { email, name } = schema.parse(body);
 
-      await this.signUpUseCase.execute({ email, name, password, roleId });
+      const result = await this.updateAccountUseCase.execute({
+        email,
+        name,
+        id: params.id,
+      });
 
       return {
-        statusCode: 204,
-        body: null,
+        statusCode: 200,
+        body: result,
       };
     } catch (error) {
       if (error instanceof ZodError) {

@@ -1,8 +1,8 @@
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import { env } from '../config/env';
-import { InvalidCredentials } from '../errors/InvalidCredentials';
-import { prismaClient } from '../lib/prismaClient';
+import { env } from '../../config/env';
+import { InvalidCredentials } from '../../errors/InvalidCredentials';
+import { prismaClient } from '../../lib/prismaClient';
 
 interface IInput {
   email: string;
@@ -28,7 +28,7 @@ export class SignInUseCase {
       { sub: account.id, role: account.roleId },
       env.jwtSecret,
       {
-        expiresIn: '1d',
+        expiresIn: '15d',
       }
     );
 

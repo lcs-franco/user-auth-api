@@ -1,5 +1,5 @@
+import { IMiddleware } from '@app/interfaces/IMiddleware';
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { IMiddleware } from '../../app/interfaces/IMiddleware';
 
 type Request = FastifyRequest<{
   Body: Record<string, any>;
