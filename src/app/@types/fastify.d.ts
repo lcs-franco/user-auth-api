@@ -5,7 +5,7 @@ declare module 'fastify' {
     metadata?: {
       account?: {
         id: string;
-        role: string;
+        roleId: string;
       };
     };
   }
