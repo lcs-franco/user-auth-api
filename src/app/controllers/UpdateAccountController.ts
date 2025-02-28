@@ -11,18 +11,20 @@ const schema = z.object({
 export class UpdateAccountController implements IController {
   constructor(private readonly updateAccountUseCase: UpdateAccountUseCase) {}
 
-  async handle({ body }: IRequest): Promise<IResponse> {
+  async handle({ body, account }: IRequest): Promise<IResponse> {
     try {
       const { email, name } = schema.parse(body);
 
-      await this.updateAccountUseCase.execute({
+      const result = await this.updateAccountUseCase.execute({
         email,
         name,
+        id: account!.id,
+        roleId: account!.roleId,
       });
 
       return {
         statusCode: 200,
-        body: null,
+        body: result,
       };
     } catch (error) {
       if (error instanceof ZodError) {
