@@ -12,7 +12,7 @@ export async function userRoutes(fasfity: FastifyInstance) {
   fasfity.post('/sign-in', routeAdapter(makeSignInController()));
 
   fasfity.put(
-    '/',
+    '/:id',
     {
       preHandler: [
         middlewareAdapter(makeAuthenticationMiddleware()),
