@@ -2,10 +2,9 @@ import { AccountAlreadyExists } from '@app/errors/AccountAlreadyExists';
 import { prismaClient } from '../../lib/prismaClient';
 
 interface IInput {
-  email: string;
-  name: string;
+  email?: string;
+  name?: string;
   id: string;
-  roleId: string;
 }
 
 interface IOutput {
@@ -14,17 +13,19 @@ interface IOutput {
 }
 
 export class UpdateAccountUseCase {
-  async execute({ email, name, id, roleId }: IInput): Promise<IOutput> {
-    const emailAlreadyInUse = await prismaClient.account.findUnique({
-      where: { email },
-    });
+  async execute({ email, name, id }: IInput): Promise<IOutput> {
+    if (email) {
+      const emailAlreadyInUse = await prismaClient.account.findUnique({
+        where: { email, NOT: { id } },
+      });
 
-    if (emailAlreadyInUse) throw new AccountAlreadyExists();
+      if (emailAlreadyInUse) throw new AccountAlreadyExists();
+    }
 
     const updatedAccount = await prismaClient.account.update({
       data: { name, email },
       where: { id },
-      select: { email: true, name: true },
+      select: { name: true, email: true },
     });
 
     return updatedAccount;
