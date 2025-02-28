@@ -1,3 +1,4 @@
+import { AccountAlreadyExists } from '@app/errors/AccountAlreadyExists';
 import { UpdateAccountUseCase } from '@app/useCases/accounts/UpdateAccountUseCase';
 import { z, ZodError } from 'zod';
 import { IController, IResponse } from '../interfaces/IController';
@@ -33,6 +34,16 @@ export class UpdateAccountController implements IController {
           body: error.issues, //* mapamento de issues e mensagens mais condizentes
         };
       }
+
+      if (error instanceof AccountAlreadyExists) {
+        return {
+          statusCode: 409, //Conflict
+          body: {
+            error: 'This email is already in use',
+          },
+        };
+      }
+
       throw error;
     }
   }
