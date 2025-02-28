@@ -5,22 +5,21 @@ import { IController, IResponse } from '../interfaces/IController';
 import { IRequest } from '../interfaces/IRequest';
 
 const schema = z.object({
-  email: z.string().email().min(2),
-  name: z.string().min(2),
+  email: z.string().email().min(2).optional(),
+  name: z.string().min(2).optional(),
 });
 
 export class UpdateAccountController implements IController {
   constructor(private readonly updateAccountUseCase: UpdateAccountUseCase) {}
 
-  async handle({ body, account }: IRequest): Promise<IResponse> {
+  async handle({ body, params }: IRequest): Promise<IResponse> {
     try {
       const { email, name } = schema.parse(body);
 
       const result = await this.updateAccountUseCase.execute({
         email,
         name,
-        id: account!.id,
-        roleId: account!.roleId,
+        id: params.id,
       });
 
       return {
