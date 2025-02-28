@@ -28,7 +28,7 @@ export class SignInUseCase {
       { sub: account.id, role: account.roleId },
       env.jwtSecret,
       {
-        expiresIn: '1d',
+        expiresIn: '15d',
       }
     );
 
