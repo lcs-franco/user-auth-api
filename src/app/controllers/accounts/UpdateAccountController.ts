@@ -1,8 +1,8 @@
 import { AccountAlreadyExists } from '@app/errors/AccountAlreadyExists';
 import { UpdateAccountUseCase } from '@app/useCases/accounts/UpdateAccountUseCase';
 import { z, ZodError } from 'zod';
-import { IController, IResponse } from '../interfaces/IController';
-import { IRequest } from '../interfaces/IRequest';
+import { IController, IResponse } from '../../interfaces/IController';
+import { IRequest } from '../../interfaces/IRequest';
 
 const schema = z.object({
   email: z.string().email().min(2).optional(),
