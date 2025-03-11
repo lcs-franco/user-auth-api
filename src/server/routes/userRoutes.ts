@@ -1,8 +1,8 @@
-import { makeAuthenticationMiddleware } from '@factories/makeAuthenticationMiddleware';
-import { makeAuthorizationMiddleware } from '@factories/makeAuthorizationMiddleware';
-import { makeSignInController } from '@factories/makeSignInController';
-import { makeSignUpController } from '@factories/makeSignUpController';
-import { makeUpdateAccountController } from '@factories/makeUpdateUsersController';
+import { makeSignInController } from '@factories/accounts/makeSignInController';
+import { makeSignUpController } from '@factories/accounts/makeSignUpController';
+import { makeUpdateAccountController } from '@factories/accounts/makeUpdateUsersController';
+import { makeAuthenticationMiddleware } from '@factories/middlewares/makeAuthenticationMiddleware';
+import { makeAuthorizationMiddleware } from '@factories/middlewares/makeAuthorizationMiddleware';
 import { middlewareAdapter } from '@server/adapters/middlewareAdapter';
 import { FastifyInstance } from 'fastify';
 import { routeAdapter } from '../adapters/routeAdapter';
