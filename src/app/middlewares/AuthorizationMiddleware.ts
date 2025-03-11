@@ -19,7 +19,7 @@ export class AuthorizationMiddleware implements IMiddleware {
     }
 
     const { permissionsCodes } = await this.getRolePermissionsUseCase.execute({
-      roleId: account.role,
+      roleId: account.roleId,
     });
 
     const isAllowed = await this.requiredPermissions.some((code) =>
