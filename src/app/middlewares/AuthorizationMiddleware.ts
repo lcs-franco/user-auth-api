@@ -1,6 +1,6 @@
 import { IData, IMiddleware, IResponse } from '../interfaces/IMiddleware';
 import { IRequest } from '../interfaces/IRequest';
-import { GetRolesPermissionsUseCase } from '../useCases/GetRolesPermissionsUseCase';
+import { GetRolesPermissionsUseCase } from '../useCases/roles/GetRolesPermissionsUseCase';
 
 export class AuthorizationMiddleware implements IMiddleware {
   constructor(
