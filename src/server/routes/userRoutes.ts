@@ -7,11 +7,11 @@ import { middlewareAdapter } from '@server/adapters/middlewareAdapter';
 import { FastifyInstance } from 'fastify';
 import { routeAdapter } from '../adapters/routeAdapter';
 
-export async function userRoutes(fasfity: FastifyInstance) {
-  fasfity.post('/sign-up', routeAdapter(makeSignUpController()));
-  fasfity.post('/sign-in', routeAdapter(makeSignInController()));
+export async function userRoutes(fastify: FastifyInstance) {
+  fastify.post('/sign-up', routeAdapter(makeSignUpController()));
+  fastify.post('/sign-in', routeAdapter(makeSignInController()));
 
-  fasfity.put(
+  fastify.put(
     '/:id',
     {
       preHandler: [
@@ -22,5 +22,5 @@ export async function userRoutes(fasfity: FastifyInstance) {
     routeAdapter(makeUpdateAccountController())
   );
 
-  fasfity.post('/logout', () => {});
+  fastify.post('/logout', () => {});
 }
