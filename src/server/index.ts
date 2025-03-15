@@ -2,11 +2,13 @@ import { makeAuthenticationMiddleware } from '@factories/middlewares/makeAuthent
 import { makeAuthorizationMiddleware } from '@factories/middlewares/makeAuthorizationMiddleware';
 import Fastify from 'fastify';
 import { middlewareAdapter } from './adapters/middlewareAdapter';
+import { rolesRoutes } from './routes/rolesRoutes';
 import { userRoutes } from './routes/userRoutes';
 
 const fastify = Fastify();
 
 fastify.register(userRoutes, { prefix: 'users' });
+fastify.register(rolesRoutes, { prefix: 'roles' });
 
 fastify.post(
   '/create-users',
