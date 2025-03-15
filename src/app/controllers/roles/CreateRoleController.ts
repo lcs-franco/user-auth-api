@@ -15,11 +15,11 @@ export class CreateRoleController implements IController {
     try {
       const { name } = schema.parse(body);
 
-      await this.createRoleUseCase.execute({ name });
+      const role = await this.createRoleUseCase.execute({ name });
 
       return {
         statusCode: 200,
-        body: null,
+        body: { role },
       };
     } catch (error) {
       if (error instanceof ZodError) {
