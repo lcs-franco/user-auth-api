@@ -5,7 +5,10 @@ interface IInput {
   name: string;
 }
 
-type IOutput = void;
+interface IOutput {
+  name: string;
+  id: string;
+}
 
 export class CreateRoleUseCase {
   async execute({ name }: IInput): Promise<IOutput> {
@@ -19,10 +22,16 @@ export class CreateRoleUseCase {
 
     if (findNameAlreadyInUse) throw new RoleAlreadyExists();
 
-    await prismaClient.role.create({
+    const role = await prismaClient.role.create({
       data: {
         name: formatedName,
       },
+      select: {
+        name: true,
+        id: true,
+      },
     });
+
+    return role;
   }
 }
