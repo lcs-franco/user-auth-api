@@ -19,7 +19,7 @@ export class CreateRoleController implements IController {
 
       return {
         statusCode: 200,
-        body: { role },
+        body: role,
       };
     } catch (error) {
       if (error instanceof ZodError) {
