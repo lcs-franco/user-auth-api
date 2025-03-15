@@ -1,9 +1,8 @@
+import { RoleAlreadyExists } from '@app/errors/RoleAlreadyExists';
+import { CreateRoleUseCase } from '@app/useCases/roles/CreateRoleUseCase';
 import { z, ZodError } from 'zod';
-import { InvalidCredentials } from '../../errors/InvalidCredentials';
 import { IController, IResponse } from '../../interfaces/IController';
 import { IRequest } from '../../interfaces/IRequest';
-import { CreateRoleUseCase } from '@app/useCases/roles/CreateRoleUseCase';
-import { RoleAlreadyExists } from '@app/errors/RoleAlreadyExists';
 
 const schema = z.object({
   name: z.string().min(2),
