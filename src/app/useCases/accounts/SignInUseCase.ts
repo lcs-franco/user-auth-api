@@ -25,7 +25,7 @@ export class SignInUseCase {
     if (!isPasswordValid || !account) throw new InvalidCredentials();
 
     const accessToken = sign(
-      { sub: account.id, role: account.roleId },
+      { sub: account.id, roleId: account.roleId },
       env.jwtSecret,
       {
         expiresIn: '15d',
