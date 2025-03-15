@@ -11,9 +11,9 @@ export class CreateRoleUseCase {
   async execute({ name }: IInput): Promise<IOutput> {
     const formatedName = name.toUpperCase();
 
-    const findNameAlreadyInUse = await prismaClient.role.findFirst({
+    const findNameAlreadyInUse = await prismaClient.role.findUnique({
       where: {
-        name: name,
+        name: formatedName,
       },
     });
 
