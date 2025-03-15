@@ -26,10 +26,6 @@ export class CreateRoleUseCase {
       data: {
         name: formatedName,
       },
-      select: {
-        name: true,
-        id: true,
-      },
     });
 
     return role;
