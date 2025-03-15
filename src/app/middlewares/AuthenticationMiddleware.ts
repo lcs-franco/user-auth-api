@@ -20,13 +20,13 @@ export class AuthenticationMiddleware implements IMiddleware {
       const [type, token] = authorization.split(' ');
       if (type !== 'Bearer') throw new Error();
 
-      const { sub: id, role } = verify(token, env.jwtSecret) as JwtPayload;
+      const { sub: id, roleId } = verify(token, env.jwtSecret) as JwtPayload;
 
       return {
         data: {
           account: {
             id,
-            role,
+            roleId,
           },
         },
       };
