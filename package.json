@@ -15,7 +15,8 @@
   },
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "generate": "tsx src/app/config/generateModule.ts"
   },
   "dependencies": {
     "@prisma/client": "6.2.1",
