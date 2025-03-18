@@ -1,5 +1,6 @@
 import { makeAuthenticationMiddleware } from '@factories/middlewares/makeAuthenticationMiddleware';
 import { makeCreatePermissionController } from '@factories/permissions/makeCreatePermissionController';
+import { makeListPermissionController } from '@factories/permissions/makeListPermissionController';
 import { middlewareAdapter } from '@server/adapters/middlewareAdapter';
 import { FastifyInstance } from 'fastify';
 import { routeAdapter } from '../adapters/routeAdapter';
@@ -11,4 +12,5 @@ export async function permissionsRoutes(fastify: FastifyInstance) {
   );
 
   fastify.post('/', routeAdapter(makeCreatePermissionController()));
+  fastify.get('/', routeAdapter(makeListPermissionController()));
 }
