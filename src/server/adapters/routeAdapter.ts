@@ -14,6 +14,7 @@ export function routeAdapter(controller: IController) {
       body: request.body,
       params: request.params,
       account: request.metadata?.account,
+      query: request.query as Record<string, any>,
       headers: request.headers as Record<string, string>,
     });
 
