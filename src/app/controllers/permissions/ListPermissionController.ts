@@ -12,7 +12,7 @@ export class ListPermissionController implements IController {
 
   async handle({ body }: IRequest): Promise<IResponse> {
     try {
-      const { filter } = schema.parse(body);
+      const { filter } = schema.parse(body); //! change to query
 
       const permissions = await this.listPermissionUseCase.execute({
         filter,
