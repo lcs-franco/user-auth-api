@@ -1,4 +1,4 @@
-import { CreatePermissionController } from '@app/controllers/permission/CreatePermissionController';
+import { CreatePermissionController } from '@app/controllers/permissions/CreatePermissionController';
 import { makeCreatePermissionUseCase } from './makeCreatePermissionUseCase';
 
 export function makeCreatePermissionController() {
