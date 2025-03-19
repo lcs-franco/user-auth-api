@@ -10,9 +10,9 @@ const schema = z.object({
 export class ListPermissionController implements IController {
   constructor(private readonly listPermissionUseCase: ListPermissionUseCase) {}
 
-  async handle({ body }: IRequest): Promise<IResponse> {
+  async handle({ query }: IRequest): Promise<IResponse> {
     try {
-      const { filter } = schema.parse(body); //! change to query
+      const { filter } = schema.parse(query);
 
       const permissions = await this.listPermissionUseCase.execute({
         filter,
