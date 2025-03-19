@@ -4,7 +4,7 @@ import { IController, IResponse } from '../../interfaces/IController';
 import { IRequest } from '../../interfaces/IRequest';
 
 const schema = z.object({
-  filter: z.string(),
+  filter: z.string().optional(),
 });
 
 export class ListPermissionController implements IController {
