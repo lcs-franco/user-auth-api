@@ -13,6 +13,8 @@ export async function permissionsRoutes(fastify: FastifyInstance) {
     middlewareAdapter(makeAuthenticationMiddleware())
   );
 
+  //! define permissions to execute every endpoint
+
   fastify.post('/', routeAdapter(makeCreatePermissionController()));
   fastify.get('/', routeAdapter(makeListPermissionController()));
   fastify.put('/:id', routeAdapter(makeUpdatePermissionController()));
