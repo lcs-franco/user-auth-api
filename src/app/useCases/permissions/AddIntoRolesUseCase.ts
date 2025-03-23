@@ -15,9 +15,6 @@ export class AddIntoRolesUseCase {
     try {
       await prismaClient.rolePermission.create({
         data: { permissionCode, roleId },
-        select: {
-          permission: { select: { name: true, code: true, roles: true } },
-        },
       });
     } catch (e) {
       if (e instanceof PrismaClientKnownRequestError) {
