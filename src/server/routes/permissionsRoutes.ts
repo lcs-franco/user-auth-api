@@ -3,6 +3,7 @@ import { makeAddIntoRolesController } from '@factories/permissions/makeAddIntoRo
 import { makeCreatePermissionController } from '@factories/permissions/makeCreatePermissionController';
 import { makeDeletePermissionController } from '@factories/permissions/makeDeletePermissionController';
 import { makeListPermissionController } from '@factories/permissions/makeListPermissionController';
+import { makeRemoveFromRolesController } from '@factories/permissions/makeRemoveFromRolesController';
 import { makeUpdatePermissionController } from '@factories/permissions/makeUpdatePermissionController';
 import { middlewareAdapter } from '@server/adapters/middlewareAdapter';
 import { FastifyInstance } from 'fastify';
@@ -21,4 +22,8 @@ export async function permissionsRoutes(fastify: FastifyInstance) {
   fastify.put('/:id', routeAdapter(makeUpdatePermissionController()));
   fastify.delete('/:id', routeAdapter(makeDeletePermissionController()));
   fastify.post('/add-into-roles', routeAdapter(makeAddIntoRolesController()));
+  fastify.post(
+    '/remove-from-roles',
+    routeAdapter(makeRemoveFromRolesController())
+  );
 }
