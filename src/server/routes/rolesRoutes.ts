@@ -3,6 +3,7 @@ import { makeCreateRoleController } from '@factories/roles/makeCreateRoleControl
 import { middlewareAdapter } from '@server/adapters/middlewareAdapter';
 import { FastifyInstance } from 'fastify';
 import { routeAdapter } from '../adapters/routeAdapter';
+import { makeListRoleController } from '@factories/roles/makeListRoleController';
 
 export async function rolesRoutes(fastify: FastifyInstance) {
   fastify.addHook(
@@ -11,4 +12,5 @@ export async function rolesRoutes(fastify: FastifyInstance) {
   );
 
   fastify.post('/', routeAdapter(makeCreateRoleController()));
+  fastify.get('/', routeAdapter(makeListRoleController()));
 }
