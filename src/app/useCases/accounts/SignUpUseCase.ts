@@ -1,3 +1,4 @@
+import { generateAccessToken } from '@app/utils/generateAccessToken';
 import { hash } from 'bcryptjs';
 import { AccountAlreadyExists } from '../../errors/AccountAlreadyExists';
 import { prismaClient } from '../../lib/prismaClient';
@@ -9,7 +10,9 @@ interface IInput {
   roleId: string;
 }
 
-type IOutput = void;
+interface IOutput {
+  accessToken: string;
+}
 
 export class SignUpUseCase {
   constructor(private readonly salt: number) {}
@@ -23,7 +26,7 @@ export class SignUpUseCase {
 
     const hashedPassword = await hash(password, this.salt);
 
-    await prismaClient.account.create({
+    const account = await prismaClient.account.create({
       data: {
         email,
         name,
@@ -31,5 +34,12 @@ export class SignUpUseCase {
         roleId,
       },
     });
+
+    const accessToken = generateAccessToken({
+      accountId: account.id,
+      roleId: account.roleId,
+    });
+
+    return { accessToken };
   }
 }
