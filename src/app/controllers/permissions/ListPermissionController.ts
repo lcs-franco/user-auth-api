@@ -14,13 +14,13 @@ export class ListPermissionController implements IController {
     try {
       const { filter } = schema.parse(query);
 
-      const permissions = await this.listPermissionUseCase.execute({
+      const result = await this.listPermissionUseCase.execute({
         filter,
       });
 
       return {
         statusCode: 200,
-        body: permissions,
+        body: result,
       };
     } catch (error) {
       if (error instanceof ZodError) {
