@@ -7,7 +7,7 @@ interface IInput {
 interface IOutput {
   id: string;
   name: string;
-  permissions: {
+  rolePermissions: {
     roleId: string;
     permissionCode: string;
   }[];
@@ -17,7 +17,7 @@ export class ListRoleUseCase {
   async execute({ filter }: IInput): Promise<IOutput[]> {
     const roles = await prismaClient.role.findMany({
       where: { name: { contains: filter } },
-      select: { id: true, name: true, permissions: true },
+      include: { rolePermissions: true },
     });
 
     return roles;

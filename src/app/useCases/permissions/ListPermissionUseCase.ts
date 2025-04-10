@@ -8,7 +8,7 @@ interface IOutput {
   id: string;
   name: string;
   code: string;
-  roles: {
+  rolePermissions: {
     roleId: string;
     permissionCode: string;
   }[];
@@ -18,7 +18,7 @@ export class ListPermissionUseCase {
   async execute({ filter }: IInput): Promise<IOutput[]> {
     const permissions = await prismaClient.permission.findMany({
       where: { code: { contains: filter } },
-      select: { id: true, name: true, code: true, roles: true },
+      select: { id: true, name: true, code: true, rolePermissions: true },
     });
 
     return permissions;
