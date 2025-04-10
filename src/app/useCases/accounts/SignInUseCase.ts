@@ -1,6 +1,5 @@
+import { generateAccessToken } from '@app/utils/generateAccessToken';
 import { compare } from 'bcryptjs';
-import { sign } from 'jsonwebtoken';
-import { env } from '../../config/env';
 import { InvalidCredentials } from '../../errors/InvalidCredentials';
 import { prismaClient } from '../../lib/prismaClient';
 
@@ -24,13 +23,10 @@ export class SignInUseCase {
 
     if (!isPasswordValid || !account) throw new InvalidCredentials();
 
-    const accessToken = sign(
-      { sub: account.id, roleId: account.roleId },
-      env.jwtSecret,
-      {
-        expiresIn: '15d',
-      }
-    );
+    const accessToken = generateAccessToken({
+      accountId: account.id,
+      roleId: account.roleId,
+    });
 
     return { accessToken };
   }
