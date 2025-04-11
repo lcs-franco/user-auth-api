@@ -26,7 +26,7 @@ export class UpdatePermissionController implements IController {
 
       return {
         statusCode: 200,
-        body: { result },
+        body: result,
       };
     } catch (error) {
       if (error instanceof ZodError) {
