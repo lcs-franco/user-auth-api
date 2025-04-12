@@ -2,7 +2,6 @@ import { makeAuthenticationMiddleware } from '@factories/middlewares/makeAuthent
 import { makeCreatePermissionController } from '@factories/permissions/makeCreatePermissionController';
 import { makeDeletePermissionController } from '@factories/permissions/makeDeletePermissionController';
 import { makeListPermissionController } from '@factories/permissions/makeListPermissionController';
-import { makeRemoveFromRolesController } from '@factories/permissions/makeRemoveFromRolesController';
 import { makeUpdatePermissionController } from '@factories/permissions/makeUpdatePermissionController';
 import { middlewareAdapter } from '@server/adapters/middlewareAdapter';
 import { FastifyInstance } from 'fastify';
