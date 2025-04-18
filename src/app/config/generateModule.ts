@@ -4,9 +4,9 @@ import path from 'path';
 
 const templates = {
   useCase: (name: string) => `
-export interface IInput {}
+interface IInput {}
 
-export interface IOutput {}
+interface IOutput {}
 
 export class ${name}UseCase {
   async execute({}: IInput): Promise<IOutput> {}

@@ -1,25 +1,26 @@
-import { NotFound } from '@app/errors/NotFound';
-import { RolePermission } from '@app/errors/RolePermission';
+import { z, ZodError } from 'zod';
 import { IController, IResponse } from '@app/interfaces/IController';
 import { IRequest } from '@app/interfaces/IRequest';
-import { AddIntoRolesUseCase } from '@app/useCases/permissions/AddIntoRolesUseCase';
-import { z, ZodError } from 'zod';
+import { CreateRolePermissionUseCase } from '@app/useCases/role-permission/CreateRolePermissionUseCase';
+import { RolePermission } from '@app/errors/RolePermission';
+import { NotFound } from '@app/errors/NotFound';
 
 const schema = z.object({
   permissionCode: z.string(),
-  roleId: z.string(),
 });
 
-export class AddIntoRolesController implements IController {
-  constructor(private readonly addIntoRolesUseCase: AddIntoRolesUseCase) {}
+export class CreateRolePermissionController implements IController {
+  constructor(
+    private readonly createRolePermissionUseCase: CreateRolePermissionUseCase
+  ) {}
 
-  async handle({ body }: IRequest): Promise<IResponse> {
+  async handle({ body, params }: IRequest): Promise<IResponse> {
     try {
-      const { permissionCode, roleId } = schema.parse(body);
+      const { permissionCode } = schema.parse(body);
 
-      await this.addIntoRolesUseCase.execute({
+      await this.createRolePermissionUseCase.execute({
         permissionCode,
-        roleId,
+        roleId: params.id,
       });
 
       return {

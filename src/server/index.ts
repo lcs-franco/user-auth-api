@@ -5,12 +5,14 @@ import { middlewareAdapter } from './adapters/middlewareAdapter';
 import { permissionsRoutes } from './routes/permissionsRoutes';
 import { rolesRoutes } from './routes/rolesRoutes';
 import { userRoutes } from './routes/userRoutes';
+import { rolePermissionsRoutes } from './routes/rolePermissiosRoutes';
 
 const fastify = Fastify();
 
 fastify.register(userRoutes, { prefix: 'users' });
 fastify.register(rolesRoutes, { prefix: 'roles' });
 fastify.register(permissionsRoutes, { prefix: 'permissions' });
+fastify.register(rolePermissionsRoutes, { prefix: 'role-permissions' });
 
 fastify.post(
   '/create-users',

@@ -1,26 +1,25 @@
-import { NotFound } from '@app/errors/NotFound';
+import { z, ZodError } from 'zod';
 import { IController, IResponse } from '@app/interfaces/IController';
 import { IRequest } from '@app/interfaces/IRequest';
-import { RemoveFromRolesUseCase } from '@app/useCases/permissions/RemoveFromRolesUseCase';
-import { z, ZodError } from 'zod';
+import { DeleteRolePermissionUseCase } from '@app/useCases/role-permission/DeleteRolePermissionUseCase';
+import { NotFound } from '@app/errors/NotFound';
 
 const schema = z.object({
   permissionCode: z.string(),
-  roleId: z.string(),
 });
 
-export class RemoveFromRolesController implements IController {
+export class DeleteRolePermissionController implements IController {
   constructor(
-    private readonly removeFromRolesUseCase: RemoveFromRolesUseCase
+    private readonly deleteRolePermissionUseCase: DeleteRolePermissionUseCase
   ) {}
 
-  async handle({ body }: IRequest): Promise<IResponse> {
+  async handle({ body, params }: IRequest): Promise<IResponse> {
     try {
-      const { permissionCode, roleId } = schema.parse(body);
+      const { permissionCode } = schema.parse(body);
 
-      await this.removeFromRolesUseCase.execute({
+      await this.deleteRolePermissionUseCase.execute({
         permissionCode,
-        roleId,
+        roleId: params.id,
       });
 
       return {
