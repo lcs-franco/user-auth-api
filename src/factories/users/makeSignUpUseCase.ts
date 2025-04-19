@@ -1,4 +1,4 @@
-import { SignUpUseCase } from '@app/useCases/accounts/SignUpUseCase';
+import { SignUpUseCase } from '@app/useCases/users/SignUpUseCase';
 
 export function makeSignUpUseCase() {
   const SALT = 10;

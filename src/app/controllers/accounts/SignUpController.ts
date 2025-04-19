@@ -2,7 +2,7 @@ import { z, ZodError } from 'zod';
 import { AccountAlreadyExists } from '../../errors/AccountAlreadyExists';
 import { IController, IResponse } from '../../interfaces/IController';
 import { IRequest } from '../../interfaces/IRequest';
-import { SignUpUseCase } from '../../useCases/accounts/SignUpUseCase';
+import { SignUpUseCase } from '../../useCases/users/SignUpUseCase';
 
 const schema = z.object({
   name: z.string().min(2),
