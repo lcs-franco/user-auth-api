@@ -14,17 +14,6 @@ fastify.register(rolesRoutes, { prefix: 'roles' });
 fastify.register(permissionsRoutes, { prefix: 'permissions' });
 fastify.register(rolePermissionsRoutes, { prefix: 'role-permissions' });
 
-fastify.post(
-  '/create-users',
-  {
-    preHandler: [
-      middlewareAdapter(makeAuthenticationMiddleware()),
-      middlewareAdapter(makeAuthorizationMiddleware(['leads:write'])),
-    ],
-  },
-  async (req, res) => res.send({ created: true })
-);
-
 export async function main() {
   try {
     fastify.listen({ port: 3001 }, () => {
