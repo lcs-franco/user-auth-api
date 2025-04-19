@@ -1,4 +1,4 @@
-import { SignUpController } from '@app/controllers/accounts/SignUpController';
+import { SignUpController } from '@app/controllers/users/SignUpController';
 import { makeSignUpUseCase } from './makeSignUpUseCase';
 
 export function makeSignUpController() {
