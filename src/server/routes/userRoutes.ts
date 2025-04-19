@@ -6,6 +6,4 @@ import { routeAdapter } from '../adapters/routeAdapter';
 export async function userRoutes(fastify: FastifyInstance) {
   fastify.post('/sign-up', routeAdapter(makeSignUpController()));
   fastify.post('/sign-in', routeAdapter(makeSignInController()));
-
-  fastify.post('/logout', () => {});
 }
