@@ -1,11 +1,8 @@
-import { makeAuthenticationMiddleware } from '@factories/middlewares/makeAuthenticationMiddleware';
-import { makeAuthorizationMiddleware } from '@factories/middlewares/makeAuthorizationMiddleware';
 import Fastify from 'fastify';
-import { middlewareAdapter } from './adapters/middlewareAdapter';
 import { permissionsRoutes } from './routes/permissionsRoutes';
+import { rolePermissionsRoutes } from './routes/rolePermissiosRoutes';
 import { rolesRoutes } from './routes/rolesRoutes';
 import { userRoutes } from './routes/userRoutes';
-import { rolePermissionsRoutes } from './routes/rolePermissiosRoutes';
 
 const fastify = Fastify();
 
